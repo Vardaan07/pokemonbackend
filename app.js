@@ -47,8 +47,8 @@ const updatePokemonHealth = async(id) => {
 setInterval(checkFeedStatus, 1000 * 60 * 60);
 
 app.use('/', express.static('/build'))
-    /*app.get("/", (req, res) => {
+app.get("/", (req, res) => {
 
 
-        res.send("Home")
-    })*/
+    res.send("Home")
+})
