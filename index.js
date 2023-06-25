@@ -2,9 +2,10 @@ import { app } from "./app.js";
 import { connectDB } from "./data/database.js";
 
 connectDB();
+import dotenv from "dotenv";
+dotenv.config();
+import path from "path";
 
-require("dotenv").config();
-const path = require("path");
 
 
 const port = process.env.PORT || 5000;
