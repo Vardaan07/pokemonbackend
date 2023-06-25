@@ -27,26 +27,27 @@ app.use("/api/v1/users", userRouter);
 app.use("/api/v1/pokemon", pokemonRouter);
 
 
-const checkFeedStatus = async ()=>{
+const checkFeedStatus = async() => {
     const adoptedPokemons = await Adopted.find();
     console.log(adoptedPokemons);
-    for (let adoptedPokemon of adoptedPokemons){
+    for (let adoptedPokemon of adoptedPokemons) {
         const timeDifference = Math.abs(Date.now() - adoptedPokemon.createdAt);
-        const isGreaterThan24Hours = timeDifference > 1000 * 60 * 60 * 24; 
-        if (isGreaterThan24Hours) await updatePokemonHealth(adoptedPokemon._id) 
+        const isGreaterThan24Hours = timeDifference > 1000 * 60 * 60 * 24;
+        if (isGreaterThan24Hours) await updatePokemonHealth(adoptedPokemon._id)
     }
 }
 
-const updatePokemonHealth = async (id) =>{
+const updatePokemonHealth = async(id) => {
     const pokemonToUpdate = await Adopted.findById(id);
     pokemonToUpdate.healthStatus -= 25;
-    
+
     await pokemonToUpdate.save();
 }
 
-setInterval(checkFeedStatus, 1000 * 60 * 60); 
+setInterval(checkFeedStatus, 1000 * 60 * 60);
 
 
-app.get("/", (req,res)=>{
+/*app.get("/", (req,res)=>{
+
     res.send("Home")
-})
+})*/
